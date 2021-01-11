@@ -1,7 +1,4 @@
------------------------------------------------------------------------------------------
---
--- main.lua
---
------------------------------------------------------------------------------------------
+local background = display.newImageRect("background.jpg", 570 , 360)
 
--- Your code here
+background.x = display.contentCenterX
+background.y = display.contentCenterY
