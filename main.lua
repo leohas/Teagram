@@ -11,7 +11,6 @@ local losango_verde = display.newImageRect("images/figuras/losango_verde.png", 9
 losango_verde.x = display.contentCenterX - 130
 losango_verde.y = display.contentCenterY - 105
 
-
 local quadrado_laranja = display.newImageRect("images/figuras/quadrado_laranja.png", 69.5 , 75   )
 
 quadrado_laranja.x = display.contentCenterX - 240
