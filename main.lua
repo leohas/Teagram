@@ -10,8 +10,8 @@ local function OnTouch(event)
 	local phase = event.phase
 
 	if ( "began" == phase ) then
-		obj:toFront()
-
+    obj:toFront()
+    
     -- Seta o foco no objeto
     display.currentStage:setFocus( obj )
     
@@ -26,7 +26,6 @@ local function OnTouch(event)
 		obj.y0 = event.y - obj.y
 
 	elseif obj.isFocus then
-
 		if ( "moved" == phase ) then
       -- Faz o objeto se mover
 			obj.x = event.x - obj.x0
