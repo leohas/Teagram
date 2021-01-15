@@ -205,10 +205,8 @@ function scene:show( event )
 
 		if ( phase == "will" ) then
 			print("gatoNivel2 Show Phase Will")
-      -- Code here runs when the scene is still off screen (but is about to come on screen)
 		elseif ( phase == "did" ) then
 			print("gatoNivel2 Show Phase Did")
-      -- Code here runs when the scene is entirely on screen
     end
 end
  
@@ -229,10 +227,8 @@ function scene:hide( event )
 
 		if ( phase == "will" ) then
 			print("gatoNivel2 Hide Phase Will")
-      -- Code here runs when the scene is on screen (but is about to go off screen)
 		elseif ( phase == "did" ) then
 			print("gatoNivel2 Hide Phase Did")
-      -- Code here runs immediately after the scene goes entirely off screen
 		end	
 end
  
@@ -247,8 +243,6 @@ function scene:destroy( event )
 	print("gatoNivel2 Destroy Function")
 
 	local sceneGroup = self.view
-	-- Code here runs prior to the removal of scene's view
-
 end
 
 scene:addEventListener( "create", scene )
