@@ -90,7 +90,7 @@ end
 ]]
 function scene:create( event )
 		local sceneGroup = self.view
-		print("gatoNivel2 Create Function")
+		print("gatoNivel1 Create Function")
 
 		-- Inicizalizando os grupos
 		groupMain = display.newGroup();
@@ -201,12 +201,12 @@ function scene:show( event )
     local sceneGroup = self.view
 		local phase = event.phase
 		
-		print("gatoNivel2 Show Function")
+		print("gatoNivel1 Show Function")
 
 		if ( phase == "will" ) then
-			print("gatoNivel2 Show Phase Will")
+			print("gatoNivel1 Show Phase Will")
 		elseif ( phase == "did" ) then
-			print("gatoNivel2 Show Phase Did")
+			print("gatoNivel1 Show Phase Did")
     end
 end
  
@@ -223,12 +223,12 @@ function scene:hide( event )
     local sceneGroup = self.view
     local phase = event.phase
 	
-		print("gatoNivel2 Hide Function")
+		print("gatoNivel1Hide Function")
 
 		if ( phase == "will" ) then
-			print("gatoNivel2 Hide Phase Will")
+			print("gatoNivel1 Hide Phase Will")
 		elseif ( phase == "did" ) then
-			print("gatoNivel2 Hide Phase Did")
+			print("gatoNivel1 Hide Phase Did")
 		end	
 end
  
@@ -240,7 +240,7 @@ end
 	o áudio da cena.
 ]]
 function scene:destroy( event )
-	print("gatoNivel2 Destroy Function")
+	print("gatoNivel1 Destroy Function")
 
 	local sceneGroup = self.view
 end
