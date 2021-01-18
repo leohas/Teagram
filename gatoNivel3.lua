@@ -1,7 +1,7 @@
 -- Inicializando o composer
 local composer = require("composer")
-
- -- Criando o objeto da cena
+ 
+-- Criando o objeto da cena
 local scene = composer.newScene()
 
 -- Variáveis para os grupos
@@ -79,6 +79,7 @@ local function OnTouch(event)
 	return true
 end
 
+ 
 -- Função create()
 --[[
 	Esta função é a parte onde criaremos os objetos e/ou imagens que farão parte
@@ -89,7 +90,7 @@ end
 ]]
 function scene:create( event )
 		local sceneGroup = self.view
-		print("gatoNivel2 Create Function")
+		print("gatoNivel3 Create Function")
 
 		-- Inicizalizando os grupos
 		groupMain = display.newGroup();
@@ -149,35 +150,50 @@ function scene:create( event )
 		triangulo_verde.x = display.contentCenterX - 240
 		triangulo_verde.y = display.contentCenterY + 80
 		triangulo_verde:addEventListener("touch", OnTouch)
+
 ----------------------------------------------------------------------------------------------------------------------
 		-- Criando peças do gato e adicionando ao Grupo do Gato
-		retangulo_verde_encaixe = display.newImageRect(groupCat,"images/figuras/retangulo_verde_bordado.png", 98.2, 53  )
+		retangulo_verde_encaixe = display.newImageRect(groupCat,"images/figuras/retangulo_verde.png", 98.2, 53  )
 		retangulo_verde_encaixe.x = display.contentCenterX + 232
-		retangulo_verde_encaixe.y = display.contentCenterY + 114
+    retangulo_verde_encaixe.y = display.contentCenterY + 114
+    retangulo_verde_encaixe.alpha = 0.3
+    retangulo_verde_encaixe:setFillColor(0,0,0)
 		
-		triangulo_amarelo_encaixe = display.newImageRect(groupCat,"images/figuras/triangulo_amarelo_bordado.png", 69.5, 147.5  )
+		triangulo_amarelo_encaixe = display.newImageRect(groupCat,"images/figuras/triangulo_amarelo.png", 69.5, 147.5  )
 		triangulo_amarelo_encaixe.x = display.contentCenterX + 147
-		triangulo_amarelo_encaixe.y = display.contentCenterY + 27 
+    triangulo_amarelo_encaixe.y = display.contentCenterY + 27
+    triangulo_amarelo_encaixe.alpha = 0.3
+    triangulo_amarelo_encaixe:setFillColor(0,0,0)
 	
-		triangulo_rosa_encaixe = display.newImageRect(groupCat,"images/figuras/triangulo_rosa_bordado.png", 34.7, 75  )
+		triangulo_rosa_encaixe = display.newImageRect(groupCat,"images/figuras/triangulo_rosa.png", 34.7, 75  )
 		triangulo_rosa_encaixe.x = display.contentCenterX + 72
-		triangulo_rosa_encaixe.y = display.contentCenterY - 115
+    triangulo_rosa_encaixe.y = display.contentCenterY - 115
+    triangulo_rosa_encaixe.alpha = 0.3
+    triangulo_rosa_encaixe:setFillColor(0,0,0)
 
-		triangulo_roxo_encaixe = display.newImageRect(groupCat,"images/figuras/triangulo_roxo_bordado.png", 33.7, 74  )
+		triangulo_roxo_encaixe = display.newImageRect(groupCat,"images/figuras/triangulo_roxo.png", 33.7, 74  )
 		triangulo_roxo_encaixe.x = display.contentCenterX + 107
-		triangulo_roxo_encaixe.y = display.contentCenterY - 115
+    triangulo_roxo_encaixe.y = display.contentCenterY - 115
+    triangulo_roxo_encaixe.alpha = 0.3
+    triangulo_roxo_encaixe:setFillColor(0,0,0)
 
-		losango_laranja_encaixe = display.newImageRect(groupCat,"images/figuras/losango_laranja_bordado.png", 69.5 , 75   )
+		losango_laranja_encaixe = display.newImageRect(groupCat,"images/figuras/losango_laranja.png", 69.5 , 75   )
 		losango_laranja_encaixe.x = display.contentCenterX + 90
-		losango_laranja_encaixe.y = display.contentCenterY - 72
+    losango_laranja_encaixe.y = display.contentCenterY - 72
+    losango_laranja_encaixe.alpha = 0.3
+    losango_laranja_encaixe:setFillColor(0,0,0)
 
-		triangulo_vermelho_encaixe = display.newImageRect(groupCat,"images/figuras/triangulo_vermelho_bordado.png", 98.2, 104.6  )
+		triangulo_vermelho_encaixe = display.newImageRect(groupCat,"images/figuras/triangulo_vermelho.png", 98.2, 104.6  )
 		triangulo_vermelho_encaixe.x = display.contentCenterX  + 132
-		triangulo_vermelho_encaixe.y = display.contentCenterY  + 87
+    triangulo_vermelho_encaixe.y = display.contentCenterY  + 87
+    triangulo_vermelho_encaixe.alpha = 0.3
+    triangulo_vermelho_encaixe:setFillColor(0,0,0)
 
-		triangulo_verde_encaixe = display.newImageRect(groupCat,"images/figuras/triangulo_verde_bordado.png", 49.1, 104.6  )
+		triangulo_verde_encaixe = display.newImageRect(groupCat,"images/figuras/triangulo_verde.png", 49.1, 104.6  )
 		triangulo_verde_encaixe.x = display.contentCenterX + 84
-		triangulo_verde_encaixe.y = display.contentCenterY + 5
+    triangulo_verde_encaixe.y = display.contentCenterY + 5
+    triangulo_verde_encaixe.alpha = 0.3
+    triangulo_verde_encaixe:setFillColor(0,0,0)
 ------------------------------------------------------------------------------------------------------------------------
 end
  
@@ -193,12 +209,12 @@ function scene:show( event )
     local sceneGroup = self.view
 		local phase = event.phase
 		
-		print("gatoNivel2 Show Function")
+		print("gatoNivel3 Show Function")
 
 		if ( phase == "will" ) then
-			print("gatoNivel2 Show Phase Will")
+			print("gatoNivel3 Show Phase Will")
 		elseif ( phase == "did" ) then
-			print("gatoNivel2 Show Phase Did")
+			print("gatoNivel3 Show Phase Did")
     end
 end
  
@@ -215,12 +231,12 @@ function scene:hide( event )
     local sceneGroup = self.view
     local phase = event.phase
 	
-		print("gatoNivel2 Hide Function")
+		print("gatoNivel3 Hide Function")
 
 		if ( phase == "will" ) then
-			print("gatoNivel2 Hide Phase Will")
+			print("gatoNivel3 Hide Phase Will")
 		elseif ( phase == "did" ) then
-			print("gatoNivel2 Hide Phase Did")
+			print("gatoNivel3 Hide Phase Did")
 		end	
 end
  
@@ -232,7 +248,7 @@ end
 	o áudio da cena.
 ]]
 function scene:destroy( event )
-	print("gatoNivel2 Destroy Function")
+	print("gatoNivel3 Destroy Function")
 
 	local sceneGroup = self.view
 end
