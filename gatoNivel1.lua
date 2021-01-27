@@ -57,32 +57,44 @@ local function OnTouch(event)
 		-- Armazena a posição inicial do objeto
 		obj.x0 = event.x - obj.x
 		obj.y0 = event.y - obj.y
+		obj.yInicial = obj.y ---RESOLVE  O PROBLEMA DA VOLTA DA PEÇA
+		obj.xInicial = obj.x
 
 	elseif obj.isFocus then
 		if ( "moved" == phase ) then
 			-- Faz o objeto se mover
-			while obj.x ~= obj.xf and obj.y ~= obj.yf do
 				obj.x = event.x - obj.x0
 				obj.y = event.y - obj.y0
-				if(obj.x == obj.xf and obj.y == obj.yf) then
-					phase = "ended"
+				print("movendo")
+				if(obj.x >= obj.xf) and (obj.y >= obj.yf) then -- Não entra exatamente nessa coordena --
+					print("fixou")
 					fit = true
-				end
 
+					event.phase = "ended"
+					if (phase == "ended") then -- Muda a fase, mas não fixa a peça --
+
+						obj.x = event.x
+						obj.y = event.y
+						print("mudou a phase")
+					end
+					
+				end
       -- Mostra gradualmente os traços do objeto, dependendo da pressão aplicada
 				if ( event.pressure ) then
 					obj:setStrokeColor( 1, 1, 1, event.pressure )
 				end
-			end
+		
 
 		elseif ( "ended" == phase or "cancelled" == phase ) then
 			if (fit == false) then
-				obj.x = event.xStart
-				obj.y = event.yStart
+				obj.x = obj.xInicial
+				obj.y = obj.yInicial
+				print("voltei")
 			end
 			-- Interrompe o foco no objeto
 			display.currentStage:setFocus( nil )
 			obj.isFocus = false
+			print("foco")
 
 			obj:setStrokeColor( 1, 1, 1, 0 )
 		end
