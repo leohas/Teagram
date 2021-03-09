@@ -38,6 +38,7 @@ local triangulo_verde_encaixe
 local function OnTouch(event)
 	local obj = event.target
 	local phase = event.phase
+	local fit = false
 
 	if ( "began" == phase ) then
     obj:toFront()
@@ -56,23 +57,32 @@ local function OnTouch(event)
 		-- Armazena a posição inicial do objeto
 		obj.x0 = event.x - obj.x
 		obj.y0 = event.y - obj.y
+		obj.yInicial = obj.y ---RESOLVE  O PROBLEMA DA VOLTA DA PEÇA
+		obj.xInicial = obj.x
 
 	elseif obj.isFocus then
 		if ( "moved" == phase ) then
-      -- Faz o objeto se mover
-			obj.x = event.x - obj.x0
-      		obj.y = event.y - obj.y0
-      
-      -- Mostra gradualmente os traços do objeto, dependendo da pressão aplicada
+			-- Faz o objeto se mover
+				obj.x = event.x - obj.x0
+				obj.y = event.y - obj.y0
+				print("movendo")
+
+			-- Mostra gradualmente os traços do objeto, dependendo da pressão aplicada
 			if ( event.pressure ) then
 				obj:setStrokeColor( 1, 1, 1, event.pressure )
 			end
 
 		elseif ( "ended" == phase or "cancelled" == phase ) then
+			if (fit == false) then
+				obj.x = obj.xInicial
+				obj.y = obj.yInicial
+				print("voltei")
+			end
 			-- Interrompe o foco no objeto
 			display.currentStage:setFocus( nil )
 			obj.isFocus = false
-
+			print("foco")
+			
 			obj:setStrokeColor( 1, 1, 1, 0 )
 		end
 	end

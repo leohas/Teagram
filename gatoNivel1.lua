@@ -174,56 +174,56 @@ function scene:create( event )
     triangulo_verde_encaixe.y = display.contentCenterY + 5
     triangulo_verde_encaixe.alpha = 0.3
 ------------------------------------------------------------------------------------------------------------------------
---Criando peças soltas e colocando no grupo do Foreground
-retangulo_verde = display.newImageRect(groupFore,"images/figuras/retangulo_verde.png", 98.2, 53  )
-retangulo_verde.x = display.contentCenterX - 130
-retangulo_verde.y = display.contentCenterY - 105
-retangulo_verde.xf = retangulo_verde_encaixe.x
-retangulo_verde.yf = retangulo_verde_encaixe.y
-retangulo_verde:addEventListener("touch", OnTouch)
+		--Criando peças soltas e colocando no grupo do Foreground
+		retangulo_verde = display.newImageRect(groupFore,"images/figuras/retangulo_verde.png", 98.2, 53  )
+		retangulo_verde.x = display.contentCenterX - 130
+		retangulo_verde.y = display.contentCenterY - 105
+		retangulo_verde.xf = retangulo_verde_encaixe.x
+		retangulo_verde.yf = retangulo_verde_encaixe.y
+		retangulo_verde:addEventListener("touch", OnTouch)
 
-triangulo_amarelo = display.newImageRect(groupFore,"images/figuras/triangulo_amarelo.png", 69.5, 147.5  )
-triangulo_amarelo.x = display.contentCenterX - 150
-triangulo_amarelo.y = display.contentCenterY + 20
-triangulo_amarelo.xf = triangulo_amarelo_encaixe.x
-triangulo_amarelo.yf = triangulo_amarelo_encaixe.y
-triangulo_amarelo:addEventListener("touch", OnTouch)
+		triangulo_amarelo = display.newImageRect(groupFore,"images/figuras/triangulo_amarelo.png", 69.5, 147.5  )
+		triangulo_amarelo.x = display.contentCenterX - 150
+		triangulo_amarelo.y = display.contentCenterY + 20
+		triangulo_amarelo.xf = triangulo_amarelo_encaixe.x
+		triangulo_amarelo.yf = triangulo_amarelo_encaixe.y
+		triangulo_amarelo:addEventListener("touch", OnTouch)
 
-triangulo_rosa = display.newImageRect(groupFore,"images/figuras/triangulo_rosa.png", 34.7, 75  )
-triangulo_rosa.x = display.contentCenterX - 240
-triangulo_rosa.y = display.contentCenterY - 105
-triangulo_rosa.xf = triangulo_rosa_encaixe.x
-triangulo_rosa.yf = triangulo_rosa_encaixe.y
-triangulo_rosa:addEventListener("touch", OnTouch)
+		triangulo_rosa = display.newImageRect(groupFore,"images/figuras/triangulo_rosa.png", 34.7, 75  )
+		triangulo_rosa.x = display.contentCenterX - 240
+		triangulo_rosa.y = display.contentCenterY - 105
+		triangulo_rosa.xf = triangulo_rosa_encaixe.x
+		triangulo_rosa.yf = triangulo_rosa_encaixe.y
+		triangulo_rosa:addEventListener("touch", OnTouch)
 
-triangulo_roxo = display.newImageRect(groupFore,"images/figuras/triangulo_roxo.png", 33.7, 74  )
-triangulo_roxo.x = display.contentCenterX - 95
-triangulo_roxo.y = display.contentCenterY - 20
-triangulo_roxo.xf = triangulo_roxo_encaixe.x
-triangulo_roxo.yf = triangulo_roxo_encaixe.y
-triangulo_roxo:addEventListener("touch", OnTouch)
+		triangulo_roxo = display.newImageRect(groupFore,"images/figuras/triangulo_roxo.png", 33.7, 74  )
+		triangulo_roxo.x = display.contentCenterX - 95
+		triangulo_roxo.y = display.contentCenterY - 20
+		triangulo_roxo.xf = triangulo_roxo_encaixe.x
+		triangulo_roxo.yf = triangulo_roxo_encaixe.y
+		triangulo_roxo:addEventListener("touch", OnTouch)
 
-losango_laranja = display.newImageRect(groupFore,"images/figuras/losango_laranja.png", 69.5 , 75   )
-losango_laranja.x = display.contentCenterX - 240
-losango_laranja.y = display.contentCenterY - 30
-losango_laranja.xf = losango_laranja_encaixe.x
-losango_laranja.yf = losango_laranja_encaixe.y
-losango_laranja:addEventListener("touch", OnTouch)
+		losango_laranja = display.newImageRect(groupFore,"images/figuras/losango_laranja.png", 69.5 , 75   )
+		losango_laranja.x = display.contentCenterX - 240
+		losango_laranja.y = display.contentCenterY - 30
+		losango_laranja.xf = losango_laranja_encaixe.x
+		losango_laranja.yf = losango_laranja_encaixe.y
+		losango_laranja:addEventListener("touch", OnTouch)
 
-triangulo_vermelho = display.newImageRect(groupFore,"images/figuras/triangulo_vermelho.png", 98.2, 104.6  )
-triangulo_vermelho.x = display.contentCenterX  - 140
-triangulo_vermelho.y = display.contentCenterY  + 80
-triangulo_vermelho.xf = triangulo_vermelho_encaixe.x
-triangulo_vermelho.yf = triangulo_vermelho_encaixe.y
-triangulo_vermelho:addEventListener("touch", OnTouch)
+		triangulo_vermelho = display.newImageRect(groupFore,"images/figuras/triangulo_vermelho.png", 98.2, 104.6  )
+		triangulo_vermelho.x = display.contentCenterX  - 140
+		triangulo_vermelho.y = display.contentCenterY  + 80
+		triangulo_vermelho.xf = triangulo_vermelho_encaixe.x
+		triangulo_vermelho.yf = triangulo_vermelho_encaixe.y
+		triangulo_vermelho:addEventListener("touch", OnTouch)
 
-triangulo_verde = display.newImageRect(groupFore,"images/figuras/triangulo_verde.png", 49.1, 104.6  )
-triangulo_verde.x = display.contentCenterX - 240
-triangulo_verde.y = display.contentCenterY + 80
-triangulo_verde.xf = triangulo_verde_encaixe.x
-triangulo_verde.yf = triangulo_verde_encaixe.y
-triangulo_verde:addEventListener("touch", OnTouch)
-end
+		triangulo_verde = display.newImageRect(groupFore,"images/figuras/triangulo_verde.png", 49.1, 104.6  )
+		triangulo_verde.x = display.contentCenterX - 240
+		triangulo_verde.y = display.contentCenterY + 80
+		triangulo_verde.xf = triangulo_verde_encaixe.x
+		triangulo_verde.yf = triangulo_verde_encaixe.y
+		triangulo_verde:addEventListener("touch", OnTouch)
+		end
  
 -- Função show()
 --[[
