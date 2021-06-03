@@ -22,17 +22,17 @@ local triangulo_amarelo_encaixe
 local triangulo_rosa
 local triangulo_rosa_encaixe
 
-local triangulo_roxo
-local triangulo_roxo_encaixe
+local triangulo_laranja
+local triangulo_laranja_encaixe
 
-local losango_laranja
-local losango_laranja_encaixe
+local losango_roxo
+local losango_roxo_encaixe
 
 local triangulo_vermelho
 local triangulo_vermelho_encaixe
 
-local triangulo_verde
-local triangulo_verde_encaixe
+local triangulo_azul
+local triangulo_azul_encaixe
 
 -- Função de gerenciamento do touch
 local function OnTouch(event)
@@ -141,25 +141,25 @@ function scene:create( event )
 		triangulo_rosa.y = display.contentCenterY - 105
 		triangulo_rosa:addEventListener("touch", OnTouch)
 
-		triangulo_roxo = display.newImageRect(groupFore,"images/figuras/triangulo_roxo.png", 33.7, 74  )
-		triangulo_roxo.x = display.contentCenterX - 95
-		triangulo_roxo.y = display.contentCenterY - 20
-		triangulo_roxo:addEventListener("touch", OnTouch)
+		triangulo_laranja = display.newImageRect(groupFore,"images/figuras/triangulo_laranja.png", 33.7, 74  )
+		triangulo_laranja.x = display.contentCenterX - 95
+		triangulo_laranja.y = display.contentCenterY - 20
+		triangulo_laranja:addEventListener("touch", OnTouch)
 
-		losango_laranja = display.newImageRect(groupFore,"images/figuras/losango_laranja.png", 69.5 , 75   )
-		losango_laranja.x = display.contentCenterX - 240
-		losango_laranja.y = display.contentCenterY - 30
-		losango_laranja:addEventListener("touch", OnTouch)
+		losango_roxo = display.newImageRect(groupFore,"images/figuras/losango_roxo.png", 69.5 , 75   )
+		losango_roxo.x = display.contentCenterX - 240
+		losango_roxo.y = display.contentCenterY - 30
+		losango_roxo:addEventListener("touch", OnTouch)
 
 		triangulo_vermelho = display.newImageRect(groupFore,"images/figuras/triangulo_vermelho.png", 98.2, 104.6  )
 		triangulo_vermelho.x = display.contentCenterX  - 140
 		triangulo_vermelho.y = display.contentCenterY  + 80
 		triangulo_vermelho:addEventListener("touch", OnTouch)
 
-		triangulo_verde = display.newImageRect(groupFore,"images/figuras/triangulo_verde.png", 49.1, 104.6  )
-		triangulo_verde.x = display.contentCenterX - 240
-		triangulo_verde.y = display.contentCenterY + 80
-		triangulo_verde:addEventListener("touch", OnTouch)
+		triangulo_azul = display.newImageRect(groupFore,"images/figuras/triangulo_azul.png", 49.1, 104.6  )
+		triangulo_azul.x = display.contentCenterX - 240
+		triangulo_azul.y = display.contentCenterY + 80
+		triangulo_azul:addEventListener("touch", OnTouch)
 
 ----------------------------------------------------------------------------------------------------------------------
 		-- Criando peças do gato e adicionando ao Grupo do Gato
@@ -181,17 +181,17 @@ function scene:create( event )
     triangulo_rosa_encaixe.alpha = 0.3
     triangulo_rosa_encaixe:setFillColor(0,0,0)
 
-		triangulo_roxo_encaixe = display.newImageRect(groupCat,"images/figuras/triangulo_roxo.png", 33.7, 74  )
-		triangulo_roxo_encaixe.x = display.contentCenterX + 107
-    triangulo_roxo_encaixe.y = display.contentCenterY - 115
-    triangulo_roxo_encaixe.alpha = 0.3
-    triangulo_roxo_encaixe:setFillColor(0,0,0)
+		triangulo_laranja_encaixe = display.newImageRect(groupCat,"images/figuras/triangulo_laranja.png", 33.7, 74  )
+		triangulo_laranja_encaixe.x = display.contentCenterX + 107
+    triangulo_laranja_encaixe.y = display.contentCenterY - 115
+    triangulo_laranja_encaixe.alpha = 0.3
+    triangulo_laranja_encaixe:setFillColor(0,0,0)
 
-		losango_laranja_encaixe = display.newImageRect(groupCat,"images/figuras/losango_laranja.png", 69.5 , 75   )
-		losango_laranja_encaixe.x = display.contentCenterX + 90
-    losango_laranja_encaixe.y = display.contentCenterY - 72
-    losango_laranja_encaixe.alpha = 0.3
-    losango_laranja_encaixe:setFillColor(0,0,0)
+		losango_roxo_encaixe = display.newImageRect(groupCat,"images/figuras/losango_roxo.png", 69.5 , 75   )
+		losango_roxo_encaixe.x = display.contentCenterX + 90
+    losango_roxo_encaixe.y = display.contentCenterY - 72
+    losango_roxo_encaixe.alpha = 0.3
+    losango_roxo_encaixe:setFillColor(0,0,0)
 
 		triangulo_vermelho_encaixe = display.newImageRect(groupCat,"images/figuras/triangulo_vermelho.png", 98.2, 104.6  )
 		triangulo_vermelho_encaixe.x = display.contentCenterX  + 132
@@ -199,11 +199,11 @@ function scene:create( event )
     triangulo_vermelho_encaixe.alpha = 0.3
     triangulo_vermelho_encaixe:setFillColor(0,0,0)
 
-		triangulo_verde_encaixe = display.newImageRect(groupCat,"images/figuras/triangulo_verde.png", 49.1, 104.6  )
-		triangulo_verde_encaixe.x = display.contentCenterX + 84
-    triangulo_verde_encaixe.y = display.contentCenterY + 5
-    triangulo_verde_encaixe.alpha = 0.3
-    triangulo_verde_encaixe:setFillColor(0,0,0)
+		triangulo_azul_encaixe = display.newImageRect(groupCat,"images/figuras/triangulo_azul.png", 49.1, 104.6  )
+		triangulo_azul_encaixe.x = display.contentCenterX + 84
+    triangulo_azul_encaixe.y = display.contentCenterY + 5
+    triangulo_azul_encaixe.alpha = 0.3
+    triangulo_azul_encaixe:setFillColor(0,0,0)
 ------------------------------------------------------------------------------------------------------------------------
 end
  
