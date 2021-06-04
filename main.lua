@@ -8,4 +8,5 @@ display.setStatusBar(display.HiddenStatusBar);
   Mudando de cena. Caso queira ir para uma cena diferente, apenas mude o nome
   do primeiro parâmetro para o nome do arquivo da cena.
 --]]
-composer.gotoScene("gatoNivel3", { time= 1000, effect= "crossFade"} );
+composer.gotoScene("fases.tutorial.nivel1", { time= 1000, effect= "crossFade"} );
+
