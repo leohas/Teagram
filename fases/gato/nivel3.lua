@@ -4,6 +4,13 @@ local composer = require("composer")
 -- Criando o objeto da cena
 local scene = composer.newScene()
 
+-- Adicionando biblioteca DragDrop
+local widget = require( "widget" )
+local DragMgr = require("dmc_dragdrop")
+local Utils = require("dmc_utils")
+
+local acertos = 0
+
 -- Variáveis para os grupos
  local groupMain
  local groupBack
@@ -34,61 +41,65 @@ local triangulo_vermelho_encaixe
 local triangulo_azul
 local triangulo_azul_encaixe
 
--- Função de gerenciamento do touch
-local function OnTouch(event)
-	local obj = event.target
-	local phase = event.phase
-	local fit = false
-
-	if ( "began" == phase ) then
-    obj:toFront()
-    
-    -- Seta o foco no objeto
-    display.currentStage:setFocus( obj )
-    
-     --[[ 
-			Seta o foco do objeto para true, para que o objeto só seja movido se o
-     	isFocus for true. Isto é necessário, pois eventos falso podem ser 
-     	mandados para o objeto. Por exemplo, quando o usuário clica em outro
-		 	lugar da tela e arrasta até o objeto.
-		--]]
-		obj.isFocus = true
-
-		-- Armazena a posição inicial do objeto
-		obj.x0 = event.x - obj.x
-		obj.y0 = event.y - obj.y
-		obj.yInicial = obj.y ---RESOLVE  O PROBLEMA DA VOLTA DA PEÇA
-		obj.xInicial = obj.x
-
-	elseif obj.isFocus then
-		if ( "moved" == phase ) then
-			-- Faz o objeto se mover
-				obj.x = event.x - obj.x0
-				obj.y = event.y - obj.y0
-				print("movendo")
-
-			-- Mostra gradualmente os traços do objeto, dependendo da pressão aplicada
-			if ( event.pressure ) then
-				obj:setStrokeColor( 1, 1, 1, event.pressure )
-			end
-
-		elseif ( "ended" == phase or "cancelled" == phase ) then
-			if (fit == false) then
-				obj.x = obj.xInicial
-				obj.y = obj.yInicial
-				print("voltei")
-			end
-			-- Interrompe o foco no objeto
-			display.currentStage:setFocus( nil )
-			obj.isFocus = false
-			print("foco")
-			
-			obj:setStrokeColor( 1, 1, 1, 0 )
-		end
-	end
+-- Funções DragDrop
+local dragStartHandler = function( e )
+	local o = e.target
+	print ("DRAG START")
 	return true
 end
 
+local dragEnterHandler = function( e )
+	local o = e.target
+	print ("DRAG ENTER HANDLER")
+	DragMgr:acceptDragDrop()
+	return true
+end
+
+local dragOverHandler = function( e )
+	return true
+end
+
+local dragExitHandler
+
+local dragDropHandler = function( e )
+	print ("DRAG DROP HANDLER")
+	acertos = acertos + 1
+	print(acertos)
+		-- if acertos == numero_elementos then
+		-- 	composer.showOverlay( "popup_win" ,{effect = "fade"  ,  params ={id=id, proximo_id = proximo_id, num_estrelas=3, level = composer.getSceneName( "current" ), proxima_cena = proxima_cena, category = category }, isModal = true} )
+		-- end	
+	return true
+end
+
+dragExitHandler = function( e )
+	print ("DRAG EXIT")
+	local o = e.target
+	return true
+end
+
+local dragStopHandler = function( e )
+	print ("DRAG STOP")
+	local o = e.target
+	return true
+end
+
+local function dragItemTouchHandler( event )
+	local target = event.target
+
+	if event.phase == "began" then
+		-- now tell the Drag Manager about it
+		DragMgr:doDrag( target, event, {data=target.source, format="Image"} )
+	end
+
+	return true
+end
+
+local touchFunction = function(event)
+		if event.phase == "ended" then
+			print (event.target.name)
+			-- composer.showOverlay( "popup_pause" ,{effect = "fade"  ,  params ={nivel_teacch = nivel_teacch, fase = fase, cena = composer.getSceneName( "current" ), category = category}, isModal = true} )
+		end
+end
  
 -- Função create()
 --[[
@@ -121,92 +132,188 @@ function scene:create( event )
 		groupFore:insert(groupCat)
 
 		-- Criando o background e botando no grupo do Background
-		backgroundImage = display.newImageRect(groupBack,"images/background.jpg", 570 , 360)
+		backgroundImage = display.newImage(groupBack,"images/background1.png", display.contentWidth, display.contentHeight)
 		backgroundImage.x = display.contentCenterX
 		backgroundImage.y = display.contentCenterY
+----------------------------------------------------------------------------------------------------------------------
+			-- Criando peças do gato e adicionando ao Grupo do Gato
+			retangulo_verde_encaixe = display.newImage("images/figuras/retangulo_verde1.png")
+			groupCat:insert(retangulo_verde_encaixe)
+			retangulo_verde_encaixe.name = 'retangulo_verde'
+			retangulo_verde_encaixe.x = display.contentCenterX + 560
+			retangulo_verde_encaixe.y = display.contentCenterY + 257.5
+			retangulo_verde_encaixe.alpha = 0.3
+			retangulo_verde_encaixe:setFillColor(0,0,0)
+	
+			triangulo_amarelo_encaixe = display.newImage("images/figuras/triangulo_amarelo1.png")
+			groupCat:insert(triangulo_amarelo_encaixe)
+			triangulo_amarelo_encaixe.name = 'triangulo_amarelo'
+			triangulo_amarelo_encaixe.x = display.contentCenterX + 330
+			triangulo_amarelo_encaixe.y = display.contentCenterY + 71
+			triangulo_amarelo_encaixe.alpha = 0.3
+			triangulo_amarelo_encaixe:setFillColor(0,0,0)
+		
+			triangulo_rosa_encaixe = display.newImage("images/figuras/triangulo_rosa1.png")
+			groupCat:insert(triangulo_rosa_encaixe)
+			triangulo_rosa_encaixe.name = 'triangulo_rosa'
+			triangulo_rosa_encaixe.x = display.contentCenterX + 145
+			triangulo_rosa_encaixe.y = display.contentCenterY - 260
+			triangulo_rosa_encaixe.alpha = 0.3
+			triangulo_rosa_encaixe:setFillColor(0,0,0)
+	
+			triangulo_laranja_encaixe = display.newImage("images/figuras/triangulo_laranja1.png")
+			groupCat:insert(triangulo_laranja_encaixe)
+			triangulo_laranja_encaixe.name = 'triangulo_laranja'
+			triangulo_laranja_encaixe.x = display.contentCenterX + 250
+			triangulo_laranja_encaixe.y = display.contentCenterY - 260
+			triangulo_laranja_encaixe.alpha = 0.3
+			triangulo_laranja_encaixe:setFillColor(0,0,0)
+	
+			losango_roxo_encaixe = display.newImage("images/figuras/losango_roxo1.png")
+			groupCat:insert(losango_roxo_encaixe)
+			losango_roxo_encaixe.name = 'losango_roxo'
+			losango_roxo_encaixe.x = display.contentCenterX + 195
+			losango_roxo_encaixe.y = display.contentCenterY - 155
+			losango_roxo_encaixe.alpha = 0.3
+			losango_roxo_encaixe:setFillColor(0,0,0)
+	
+			triangulo_vermelho_encaixe = display.newImage("images/figuras/triangulo_vermelho1.png")
+			groupCat:insert(triangulo_vermelho_encaixe)
+			triangulo_vermelho_encaixe.name = 'triangulo_vermelho'
+			triangulo_vermelho_encaixe.x = display.contentCenterX  + 300
+			triangulo_vermelho_encaixe.y = display.contentCenterY  + 209.5
+			triangulo_vermelho_encaixe.alpha = 0.3
+			triangulo_vermelho_encaixe:setFillColor(0,0,0)
+	
+			triangulo_azul_encaixe = display.newImage("images/figuras/triangulo_azul1.png")
+			groupCat:insert(triangulo_azul_encaixe)
+			triangulo_azul_encaixe.name = 'triangulo_azul'
+			triangulo_azul_encaixe.x = display.contentCenterX + 180
+			triangulo_azul_encaixe.y = display.contentCenterY + 35
+			triangulo_azul_encaixe.alpha = 0.3
+			triangulo_azul_encaixe:setFillColor(0,0,0)
 ----------------------------------------------------------------------------------------------------------------
 		--Criando peças soltas e colocando no grupo do Foreground
-		retangulo_verde = display.newImageRect(groupFore,"images/figuras/retangulo_verde.png", 98.2, 53  )
-		retangulo_verde.x = display.contentCenterX - 130
-		retangulo_verde.y = display.contentCenterY - 105
-		retangulo_verde:addEventListener("touch", OnTouch)
+		retangulo_verde = display.newImage("images/figuras/retangulo_verde1.png")
+		retangulo_verde.source = "images/figuras/retangulo_verde1.png"
+		groupFore:insert(retangulo_verde)
+		retangulo_verde.name = 'retangulo_verde'
+		retangulo_verde.x = display.contentCenterX - 530
+		retangulo_verde.y = display.contentCenterY - 310
+		retangulo_verde:addEventListener("touch", dragItemTouchHandler)
 
-		triangulo_amarelo = display.newImageRect(groupFore,"images/figuras/triangulo_amarelo.png", 69.5, 147.5  )
-		triangulo_amarelo.x = display.contentCenterX - 150
-		triangulo_amarelo.y = display.contentCenterY + 20
-		triangulo_amarelo:addEventListener("touch", OnTouch)
+		triangulo_amarelo = display.newImage("images/figuras/triangulo_amarelo1.png")
+		triangulo_amarelo.source = "images/figuras/triangulo_amarelo1.png"
+		groupFore:insert(triangulo_amarelo)
+		triangulo_amarelo.name = 'triangulo_amarelo'
+		triangulo_amarelo.x = display.contentCenterX - 180
+		triangulo_amarelo.y = display.contentCenterY - 220
+		triangulo_amarelo:addEventListener("touch", dragItemTouchHandler)
 
-		triangulo_rosa = display.newImageRect(groupFore,"images/figuras/triangulo_rosa.png", 34.7, 75  )
-		triangulo_rosa.x = display.contentCenterX - 240
-		triangulo_rosa.y = display.contentCenterY - 105
-		triangulo_rosa:addEventListener("touch", OnTouch)
+		triangulo_rosa = display.newImage("images/figuras/triangulo_rosa1.png")
+		triangulo_rosa.source = "images/figuras/triangulo_rosa1.png"
+		groupFore:insert(triangulo_rosa)
+		triangulo_rosa.name = 'triangulo_rosa'
+		triangulo_rosa.x = display.contentCenterX - 535
+		triangulo_rosa.y = display.contentCenterY - 45
+		triangulo_rosa:addEventListener("touch", dragItemTouchHandler)
 
-		triangulo_laranja = display.newImageRect(groupFore,"images/figuras/triangulo_laranja.png", 33.7, 74  )
-		triangulo_laranja.x = display.contentCenterX - 95
-		triangulo_laranja.y = display.contentCenterY - 20
-		triangulo_laranja:addEventListener("touch", OnTouch)
+		triangulo_laranja = display.newImage("images/figuras/triangulo_laranja1.png")
+		triangulo_laranja.source = "images/figuras/triangulo_laranja1.png"
+		groupFore:insert(triangulo_laranja)
+		triangulo_laranja.name = 'triangulo_laranja'
+		triangulo_laranja.x = display.contentCenterX - 395
+		triangulo_laranja.y = display.contentCenterY - 190
+		triangulo_laranja:addEventListener("touch", dragItemTouchHandler)
 
-		losango_roxo = display.newImageRect(groupFore,"images/figuras/losango_roxo.png", 69.5 , 75   )
-		losango_roxo.x = display.contentCenterX - 240
-		losango_roxo.y = display.contentCenterY - 30
-		losango_roxo:addEventListener("touch", OnTouch)
+		losango_roxo = display.newImage("images/figuras/losango_roxo1.png")
+		losango_roxo.source = "images/figuras/losango_roxo1.png"
+		groupFore:insert(losango_roxo)
+		losango_roxo.name = 'losango_roxo'
+		losango_roxo.x = display.contentCenterX - 320
+		losango_roxo.y = display.contentCenterY + 90
+		losango_roxo:addEventListener("touch", dragItemTouchHandler)
 
-		triangulo_vermelho = display.newImageRect(groupFore,"images/figuras/triangulo_vermelho.png", 98.2, 104.6  )
-		triangulo_vermelho.x = display.contentCenterX  - 140
-		triangulo_vermelho.y = display.contentCenterY  + 80
-		triangulo_vermelho:addEventListener("touch", OnTouch)
+		triangulo_vermelho = display.newImage("images/figuras/triangulo_vermelho1.png")
+		triangulo_vermelho.source = "images/figuras/triangulo_vermelho1.png"
+		groupFore:insert(triangulo_vermelho)
+		triangulo_vermelho.name = 'triangulo_vermelho'
+		triangulo_vermelho.x = display.contentCenterX  - 230
+		triangulo_vermelho.y = display.contentCenterY  + 250
+		triangulo_vermelho:addEventListener("touch", dragItemTouchHandler)
 
-		triangulo_azul = display.newImageRect(groupFore,"images/figuras/triangulo_azul.png", 49.1, 104.6  )
-		triangulo_azul.x = display.contentCenterX - 240
-		triangulo_azul.y = display.contentCenterY + 80
-		triangulo_azul:addEventListener("touch", OnTouch)
-
-----------------------------------------------------------------------------------------------------------------------
-		-- Criando peças do gato e adicionando ao Grupo do Gato
-		retangulo_verde_encaixe = display.newImageRect(groupCat,"images/figuras/retangulo_verde.png", 98.2, 53  )
-		retangulo_verde_encaixe.x = display.contentCenterX + 232
-    retangulo_verde_encaixe.y = display.contentCenterY + 114
-    retangulo_verde_encaixe.alpha = 0.3
-    retangulo_verde_encaixe:setFillColor(0,0,0)
+		triangulo_azul = display.newImage("images/figuras/triangulo_azul1.png")
+		triangulo_azul.source = "images/figuras/triangulo_azul1.png"
+		groupFore:insert(triangulo_azul)
+		triangulo_azul.name = 'triangulo_azul'
+		triangulo_azul.x = display.contentCenterX - 550
+		triangulo_azul.y = display.contentCenterY + 240
+		triangulo_azul:addEventListener("touch", dragItemTouchHandler)
 		
-		triangulo_amarelo_encaixe = display.newImageRect(groupCat,"images/figuras/triangulo_amarelo.png", 69.5, 147.5  )
-		triangulo_amarelo_encaixe.x = display.contentCenterX + 147
-    triangulo_amarelo_encaixe.y = display.contentCenterY + 27
-    triangulo_amarelo_encaixe.alpha = 0.3
-    triangulo_amarelo_encaixe:setFillColor(0,0,0)
-	
-		triangulo_rosa_encaixe = display.newImageRect(groupCat,"images/figuras/triangulo_rosa.png", 34.7, 75  )
-		triangulo_rosa_encaixe.x = display.contentCenterX + 72
-    triangulo_rosa_encaixe.y = display.contentCenterY - 115
-    triangulo_rosa_encaixe.alpha = 0.3
-    triangulo_rosa_encaixe:setFillColor(0,0,0)
+		DragMgr:register(triangulo_amarelo_encaixe, {
+			grupo = groupCat,	
+			dragStart=dragStartHandler,
+			dragEnter=dragEnterHandler,
+			dragOver=dragOverHandler,
+			dragDrop=dragDropHandler,
+			dragExit=dragExitHandler,
+			dragStop=dragStopHandler})
+		
+			DragMgr:register(triangulo_azul_encaixe, {
+				grupo = groupCat,	
+				dragStart=dragStartHandler,
+				dragEnter=dragEnterHandler,
+				dragOver=dragOverHandler,
+				dragDrop=dragDropHandler,
+				dragExit=dragExitHandler,
+				dragStop=dragStopHandler})
+		
+			DragMgr:register(triangulo_laranja_encaixe, {
+				grupo = groupCat,	
+				dragStart=dragStartHandler,
+				dragEnter=dragEnterHandler,
+				dragOver=dragOverHandler,
+				dragDrop=dragDropHandler,
+				dragExit=dragExitHandler,
+				dragStop=dragStopHandler})
+		
+			DragMgr:register(triangulo_rosa_encaixe, {
+				grupo = groupCat,	
+				dragStart=dragStartHandler,
+				dragEnter=dragEnterHandler,
+				dragOver=dragOverHandler,
+				dragDrop=dragDropHandler,
+				dragExit=dragExitHandler,
+				dragStop=dragStopHandler})
+		
+			DragMgr:register(triangulo_vermelho_encaixe, {
+				grupo = groupCat,	
+				dragStart=dragStartHandler,
+				dragEnter=dragEnterHandler,
+				dragOver=dragOverHandler,
+				dragDrop=dragDropHandler,
+				dragExit=dragExitHandler,
+				dragStop=dragStopHandler})
+		
+			DragMgr:register(losango_roxo_encaixe, {
+				grupo = groupCat,	
+				dragStart=dragStartHandler,
+				dragEnter=dragEnterHandler,
+				dragOver=dragOverHandler,
+				dragDrop=dragDropHandler,
+				dragExit=dragExitHandler,
+				dragStop=dragStopHandler})
 
-		triangulo_laranja_encaixe = display.newImageRect(groupCat,"images/figuras/triangulo_laranja.png", 33.7, 74  )
-		triangulo_laranja_encaixe.x = display.contentCenterX + 107
-    triangulo_laranja_encaixe.y = display.contentCenterY - 115
-    triangulo_laranja_encaixe.alpha = 0.3
-    triangulo_laranja_encaixe:setFillColor(0,0,0)
-
-		losango_roxo_encaixe = display.newImageRect(groupCat,"images/figuras/losango_roxo.png", 69.5 , 75   )
-		losango_roxo_encaixe.x = display.contentCenterX + 90
-    losango_roxo_encaixe.y = display.contentCenterY - 72
-    losango_roxo_encaixe.alpha = 0.3
-    losango_roxo_encaixe:setFillColor(0,0,0)
-
-		triangulo_vermelho_encaixe = display.newImageRect(groupCat,"images/figuras/triangulo_vermelho.png", 98.2, 104.6  )
-		triangulo_vermelho_encaixe.x = display.contentCenterX  + 132
-    triangulo_vermelho_encaixe.y = display.contentCenterY  + 87
-    triangulo_vermelho_encaixe.alpha = 0.3
-    triangulo_vermelho_encaixe:setFillColor(0,0,0)
-
-		triangulo_azul_encaixe = display.newImageRect(groupCat,"images/figuras/triangulo_azul.png", 49.1, 104.6  )
-		triangulo_azul_encaixe.x = display.contentCenterX + 84
-    triangulo_azul_encaixe.y = display.contentCenterY + 5
-    triangulo_azul_encaixe.alpha = 0.3
-    triangulo_azul_encaixe:setFillColor(0,0,0)
-------------------------------------------------------------------------------------------------------------------------
+			DragMgr:register(retangulo_verde_encaixe, {
+				grupo = groupCat,	
+				dragStart=dragStartHandler,
+				dragEnter=dragEnterHandler,
+				dragOver=dragOverHandler,
+				dragDrop=dragDropHandler,
+				dragExit=dragExitHandler,
+				dragStop=dragStopHandler})
 end
- 
+------------------------------------------------------------------------------------------------------------------------
 -- Função show()
 --[[
 	Esta função mostrará os objetos na cena. Possui a fase Will e a fase Did.
